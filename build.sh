@@ -30,7 +30,7 @@ make O=out ARCH=arm64 feather_defconfig
 PATH="${PWD}/clang/bin:${PATH}" \
 make -j$(nproc --all) O=out \
 			ARCH=$ARCH \
-			CC=clang HOSTCC=clang \
+			CC=clang \
             CLANG_TRIPLE=aarch64-linux-gnu- \
 			CROSS_COMPILE=aarch64-linux-gnu- \
 			CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
@@ -58,6 +58,7 @@ else
 fi
 curl -sL https://git.io/file-transfer | sh
 ./transfer wet *.zip
+./transfer wet error.log
 }
 
 compile
