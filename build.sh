@@ -19,6 +19,7 @@ kernel="out/arch/arm64/boot/Image"
 dtb="out/arch/arm64/boot/dts/vendor/oplus_7325/yupik.dtb"
 dtbo="out/arch/arm64/boot/dts/vendor/oplus_7325/yupik-21643-overlay.dtbo"
 
+curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
 
 git clone --depth=1 https://github.com/kdrag0n/proton-clang clang
 
@@ -61,4 +62,3 @@ curl -sL https://git.io/file-transfer | sh
 
 compile
 zupload
-echo -e "\nCompleted in $((SECONDS / 60)) minute(s) and $((SECONDS % 60)) second(s) !"
