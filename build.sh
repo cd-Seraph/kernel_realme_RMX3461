@@ -15,9 +15,6 @@ export ARCH=arm64
 export KBUILD_BUILD_HOST=ice
 export KBUILD_BUILD_USER="cd-Seraph"
 ZIPNAME=Ice-Test-OSS-KERNEL-"${DATE}".zip
-kernel="out/arch/arm64/boot/Image"
-dtb="out/arch/arm64/boot/dts/vendor/oplus_7325/yupik.dtb"
-dtbo="out/arch/arm64/boot/dts/vendor/oplus_7325/yupik-21643-overlay.dtbo"
 
 curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
 
@@ -45,6 +42,9 @@ make -j$(nproc --all) O=out \
 
 function zupload()
 {
+kernel="out/arch/arm64/boot/Image"
+dtb="out/arch/arm64/boot/dts/vendor/oplus_7325/yupik.dtb"
+dtbo="out/arch/arm64/boot/dts/vendor/oplus_7325/yupik-21643-overlay.dtbo"
 if [ -f "$kernel" ] && [ -f "$dtb" ] && [ -f "$dtbo" ]; then
 	echo -e "\nKernel compiled succesfully! Zipping up...\n"
 
