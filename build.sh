@@ -44,16 +44,16 @@ function zupload()
 {
 
 kernel="out/arch/arm64/boot/Image"
-dtb="out/arch/arm64/boot/dts/vendor/oplus_7325/yupik.dtb"
-dtbo="out/arch/arm64/boot/dts/vendor/oplus_7325/yupik-21643-overlay.dtbo"
-if [ -f "$kernel" ] && [ -f "$dtb" ] && [ -f "$dtbo" ]; then
+# dtb="out/arch/arm64/boot/dts/vendor/oplus_7325/yupik.dtb"
+# dtbo="out/arch/arm64/boot/dts/vendor/oplus_7325/yupik-21643-overlay.dtbo"
+if [ -f "$kernel" ]; then
 	echo -e "\nKernel compiled succesfully! Zipping up...\n"
 
       git clone --depth=1 https://github.com/cd-Seraph/AnyKernel3.git -b master AnyKernel
 	
 	cp $kernel AnyKernel
-	cp $dtb AnyKernel/dtb
-	python2 scripts/dtc/libfdt/mkdtboimg.py create AnyKernel/dtbo.img --page_size=4096 $dtbo
+	# cp $dtb AnyKernel/dtb
+	# python2 scripts/dtc/libfdt/mkdtboimg.py create AnyKernel/dtbo.img --page_size=4096 $dtbo
 	cd AnyKernel
 	zip -r9 "../$ZIPNAME" * -x .git README.md *placeholder
 	cd ..
