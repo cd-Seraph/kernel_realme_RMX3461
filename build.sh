@@ -42,6 +42,7 @@ make -j$(nproc --all) O=out \
 
 function zupload()
 {
+
 kernel="out/arch/arm64/boot/Image"
 dtb="out/arch/arm64/boot/dts/vendor/oplus_7325/yupik.dtb"
 dtbo="out/arch/arm64/boot/dts/vendor/oplus_7325/yupik-21643-overlay.dtbo"
@@ -62,11 +63,10 @@ else
 	echo -e "\nCompilation failed!"
 	exit 1
 fi
+curl -sL https://git.io/file-transfer | sh
+./transfer wet error.log
+
 }
 
 compile
 zupload
-
-curl -sL https://git.io/file-transfer | sh
-./transfer wet *.zip
-./transfer wet error.log
