@@ -1,0 +1,62 @@
+name: Kernel Builder
+
+on:
+    workflow_dispatch:
+        inputs:
+            DEVICE_NAME:
+                description: 'Your Device Codename'
+                required: true
+                default: 'RMX3461'
+            ANDROID_VERSION:
+                description: 'Your Android Version'
+                required: true
+                default: 's-oss'
+permissions:
+   contents: write
+
+jobs:
+    build:
+        if: github.event.repository.owner.id == github.event.sender.id
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+        - name: Display Run Parameters
+          run: |
+            SECONDS=0 # builtin bash timer
+            echo "::group::User Environment Variables"
+            echo "Device Name: ${{ github.event.inputs.DEVICE_NAME }}"
+            echo "Android Version: ${{ github.event.inputs.ANDROID_VERSION }}"
+            
+        # You might want to Checkout your repo first, but not mandatory
+        - name: Check Out
+          uses: actions/checkout@v3
+          
+        - name: Start Building Kernel
+          run: |
+            ./build.sh
+            
+        - name: Upload to Release
+          uses: ncipollo/release-action@v1.11.1
+          with:
+            artifacts: |
+                *.zip
+            name: Custom Kernel - Build ${{ steps.props.outputs.date }}
+            draft: false
+            prerelease: false
+            allowUpdates: true
+            tag: ${{ github.run_id }}
+            token: ${{ secrets.GITHUB_TOKEN }}
+            body: |
+                ## Custom Kernel via Github Actions for ${{ github.event.inputs.DEVICE_NAME }}-${{ github.event.inputs.ANDROID_VERSION }}
+                - Notes:
+                  - Uploaded recovery flashable android kernel.
+                  - Read my instruction below first.
+                - Flash:
+                  - Download compiled kernel zip, save it on your device or computer.
+                  - Flash it via adb sideload, or twrp.
+                  
+        - name: Link of Release
+          run: |
+            echo "Enjoy your Newly Built Kernel"
+            echo "https://github.com/${GITHUB_REPOSITORY}/releases/tag/${{ github.run_id }}-${{ steps.props.outputs.date }}"
