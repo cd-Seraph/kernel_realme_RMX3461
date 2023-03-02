@@ -62,10 +62,11 @@ else
 	echo -e "\nCompilation failed!"
 	exit 1
 fi
-curl -sL https://git.io/file-transfer | sh
-./transfer wet *.zip
-./transfer wet error.log
 }
 
 compile
 zupload
+
+curl -sL https://git.io/file-transfer | sh
+./transfer wet *.zip
+./transfer wet error.log
