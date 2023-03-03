@@ -41,6 +41,7 @@ jobs:
           with:
             artifacts: |
                 *.zip
+                *.log
             name: Custom Kernel - Build ${{ steps.props.outputs.date }}
             draft: false
             prerelease: false
