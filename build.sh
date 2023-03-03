@@ -30,11 +30,17 @@ make O=out ARCH=arm64 feather_defconfig
 PATH="${PWD}/clang/bin:${PATH}" \
 make -j$(nproc --all) O=out \
 			ARCH=$ARCH \
-			CC=clang \
-			CLANG_TRIPLE=aarch64-linux-gnu- \
-			CROSS_COMPILE=aarch64-linux-android- \
+			CC="clang" \
+			CROSS_COMPILE=aarch64-linux-gnu- \
 			CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
-            		CONFIG_NO_ERROR_ON_MISMATCH=y 2>&1 | tee error.log 
+            LLVM=1 \
+			LD=ld.lld \
+			AR=llvm-ar \
+			NM=llvm-nm \
+			OBJCOPY=llvm-objcopy \
+			OBJDUMP=llvm-objdump \
+			STRIP=llvm-strip \
+            CONFIG_NO_ERROR_ON_MISMATCH=y 2>&1 | tee error.log 
 }
 
 function zupload()
