@@ -30,15 +30,9 @@ make O=out ARCH=arm64 feather_defconfig
 PATH="${PWD}/clang/bin:${PATH}" \
 make -j$(nproc --all) O=out \
 			ARCH=$ARCH \
-			CC="clang" \
-			CROSS_COMPILE=aarch64-linux-gnu- \
-			CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
-           	 	LLVM=1 \
-			AR=llvm-ar \
-			NM=llvm-nm \
-			OBJCOPY=llvm-objcopy \
-			OBJDUMP=llvm-objdump \
-			STRIP=llvm-strip \
+			CC=clang \
+			CLANG_TRIPLE=aarch64-linux-gnu- \
+			CROSS_COMPILE=aarch64-linux-android- \
             		CONFIG_NO_ERROR_ON_MISMATCH=y 2>&1 | tee error.log 
 }
 
