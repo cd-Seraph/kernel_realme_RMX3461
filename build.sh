@@ -14,11 +14,14 @@ export LC_ALL=C && export USE_CCACHE=1
 export ARCH=arm64
 export KBUILD_BUILD_HOST=ice
 export KBUILD_BUILD_USER="cd-Seraph"
-ZIPNAME=Ice-Test-OSS-KERNEL-"${DATE}".zip
+ZIPNAME=Feather-Test-OSS-KERNEL-"${DATE}".zip
 
 curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
 
 git clone --depth=1 https://github.com/kdrag0n/proton-clang clang
+
+# Built in Timer
+SECONDS=0
 
 [ -d "out" ] && rm -rf out || mkdir -p out
 
@@ -43,29 +46,12 @@ make -j$(nproc --all) O=out \
 function zupload()
 {
 
-kernel="out/arch/arm64/boot/Image"
-# dtb="out/arch/arm64/boot/dts/vendor/oplus_7325/yupik.dtb"
-# dtbo="out/arch/arm64/boot/dts/vendor/oplus_7325/yupik-21643-overlay.dtbo"
-if [ -f "$kernel" ]; then
-	echo -e "\nKernel compiled succesfully! Zipping up...\n"
-
-      git clone --depth=1 https://github.com/cd-Seraph/AnyKernel3.git -b master AnyKernel
-	
-	cp $kernel AnyKernel
-	# cp $dtb AnyKernel/dtb
-	# python2 scripts/dtc/libfdt/mkdtboimg.py create AnyKernel/dtbo.img --page_size=4096 $dtbo
-	cd AnyKernel
-	zip -r9 "../$ZIPNAME" * -x .git README.md *placeholder
-	cd ..
-	echo -e "\nCompleted in $((SECONDS / 60)) minute(s) and $((SECONDS % 60)) second(s) !"
-	echo "Zip: $ZIPNAME"
-else
-	echo -e "\nCompilation failed!"
-	exit 1
-fi
-curl -sL https://git.io/file-transfer | sh
-./transfer wet error.log
-
+git clone --depth=1 https://github.com/cd-Seraph/AnyKernel3.git -b master AnyKernel
+cp out/arch/arm64/boot/Image AnyKernel
+cd AnyKernel
+zip -r9 "../$ZIPNAME" * -x .git README.md *placeholder
+cd ..
+echo -e "\nCompleted in $((SECONDS / 60)) minute(s) and $((SECONDS % 60)) second(s) !"
 }
 
 compile
