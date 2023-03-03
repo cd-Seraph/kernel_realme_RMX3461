@@ -45,7 +45,6 @@ make -j$(nproc --all) O=out \
 
 function zupload()
 {
-
 git clone --depth=1 https://github.com/cd-Seraph/AnyKernel3.git -b master AnyKernel
 cp out/arch/arm64/boot/Image AnyKernel
 cd AnyKernel
