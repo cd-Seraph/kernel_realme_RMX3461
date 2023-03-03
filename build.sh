@@ -33,6 +33,7 @@ make -j$(nproc --all) O=out \
 			CC=clang \
 			CLANG_TRIPLE=aarch64-linux-gnu- \
 			CROSS_COMPILE=aarch64-linux-android- \
+			CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
             		CONFIG_NO_ERROR_ON_MISMATCH=y 2>&1 | tee error.log 
 }
 
