@@ -16,7 +16,7 @@ export KBUILD_BUILD_HOST=ice
 export KBUILD_BUILD_USER="cd-Seraph"
 ZIPNAME=Feather-OSS-KERNEL-RELEASE-"${DATE}".zip
 
-mkdir clang && curl -Lsq https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/android13-release.tar.gz -o clang.tgz && tar -xzf clang.tgz -C clang
+mkdir clang && curl -Lsq "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/android13-release.tar.gz" -o clang.tgz && tar -xzf clang.tgz -C clang
 
 curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
 
