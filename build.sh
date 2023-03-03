@@ -14,7 +14,7 @@ export LC_ALL=C && export USE_CCACHE=1
 export ARCH=arm64
 export KBUILD_BUILD_HOST=ice
 export KBUILD_BUILD_USER="cd-Seraph"
-ZIPNAME=Feather-Test-OSS-KERNEL-"${DATE}".zip
+ZIPNAME=Feather-OSS-KERNEL-RELEASE-"${DATE}".zip
 
 curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
 
