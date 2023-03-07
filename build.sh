@@ -11,8 +11,9 @@ export ARCH=arm64
 export KBUILD_BUILD_HOST=feather
 export KBUILD_BUILD_USER="cd-Seraph"
 ZIPNAME=Feather-OSS-KERNEL-RELEASE-"${DATE}".zip
+git clone --depth=1 https://github.com/kdrag0n/proton-clang clang
 
-mkdir clang && curl -Lsq "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/android13-release/clang-r450784d.tar.gz" -o clang.tgz && tar -xzf clang.tgz -C clang
+# mkdir clang && curl -Lsq "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/android13-release/clang-r450784d.tar.gz" -o clang.tgz && tar -xzf clang.tgz -C clang
 
 curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
 
