@@ -29,8 +29,8 @@ make -j$(nproc --all) O=out \
 			ARCH=$ARCH \
 			CC=clang HOSTCC=clang \
 			CLANG_TRIPLE=aarch64-linux-gnu- \
-			CROSS_COMPILE=aarch64-linux-android- \
-			CROSS_COMPILE_ARM32=arm-linux-androideabi-
+			CROSS_COMPILE=aarch64-linux-gnu- \
+			CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
             		CONFIG_NO_ERROR_ON_MISMATCH=y 2>&1 | tee error.log 
 
 
